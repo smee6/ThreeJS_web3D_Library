@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>three Js practice</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="three.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const geometry = new THREE.TorusKnotGeometry(6, 0.14);
+        const geometry2 = new THREE.DodecahedronGeometry();
+        const geoBall = new THREE.OctahedronGeometry(0.4);
+        const material = new THREE.MeshMatcapMaterial({
+            color: 0xbb1b1b,
+
+        });
+        const material2 = new THREE.MeshNormalMaterial({
+            color: 0xffffff,
+
+        });
+        const material_tran = new THREE.MeshNormalMaterial({
+            color: 0xffffff,
+            wireframe: true,
+
+        });
+        const cube = new THREE.Mesh(geometry, material2);
+        const cube2 = new THREE.Mesh(geometry2, material_tran);
+        const ball1 = new THREE.Mesh(geoBall, material2);
+        scene.add(cube);
+        scene.add(cube2);
+        scene.add(ball1);
+
+        camera.position.z = 5.5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.008;
+            cube.rotation.y += 0.009;
+            cube2.rotation.x += 0.03;
+            cube2.rotation.y += 0.02;
+            ball1.rotation.x += 0.05;
+            ball1.rotation.y += 0.002;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    </script>
+</body>
+
+</html>
+
+</html>
